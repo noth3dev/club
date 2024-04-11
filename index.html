@@ -3,64 +3,76 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-
+    <title>면접실 안내</title>
     <link rel="stylesheet" href="./global.css" />
     <link rel="stylesheet" href="./index.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Gmarket Sans TTF:wght@500;700&display=swap"
-    />
+    <style>
+      .clock {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        font-size: 36px;
+        color: #ffffff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #333;
+        padding: 15px 20px;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transform: scale(0.8);
+        animation: pulse 1s infinite alternate;
 
-    
+      }
+
+      @keyframes pulse {
+        from {
+          transform: scale(0.8);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+
+      /* 시계 스타일 */
+      .digital-clock {
+        position: fixed;
+        top: 20px; /* 수정된 부분: 오른쪽 상단으로 이동 */
+        right: 20px; /* 수정된 부분: 오른쪽 상단으로 이동 */
+        font-size: 48px;
+        color: #3e3e3e;
+        text-shadow: 2px 2px 16px rgba(0, 0, 0, 0.5);
+      }
+    </style>
   </head>
-  <body>
-    <div class="parent">
-      <b class="b">
-        <p class="p">스튜디오 루멘 / 하푼 / 랜드스케이프</p>
-        <p class="p1">면접장 안내</p>
-      </b>
-      <section class="frame-wrapper">
-        <div class="group">
-          <b class="b1">
-            <p class="p2">현위치</p>
-            <p class="p3">(대기실)</p>
-          </b>
-          <div class="frame-container">
-            <div class="frame-parent">
-              <div class="frame-group">
-                <div class="frame-div">
-                  <div class="wrapper">
-                    <div class="div">303</div>
-                  </div>
-                  <div class="container">
-                    <div class="div1">304</div>
-                  </div>
-                </div>
-                <button class="frame-button">
-                  <b class="b2">루멘</b>
-                  <div class="frame-wrapper1">
-                    <div class="vector-parent">
-                      <img
-                        class="frame-child"
-                        alt=""
-                        src="./public/vector-3.svg"
-                      />
-
-                      <b class="b3">하푼</b>
-                    </div>
-                  </div>
-                </button>
-              </div>
-              <div class="parent1">
-                <div class="div2">305</div>
-                <div class="frame">
-                  <b class="b4">랜드스케이프</b>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  <body style="overflow: hidden; user-select: none;">
+    <div class="we-1-parent">
+      <img class="we-1-icon" alt="" src="./public/we-1@2x.png" />
     </div>
+
+    <!-- 시계 -->
+    <div class="digital-clock" id="digitalClock"></div>
+
+    <!-- 시계 스크립트 -->
+    <script>
+      function updateClock() {
+    var now = new Date();
+    var hours = now.getHours();
+    var meridiem = hours < 12 ? "AM" : "PM"; // 시간이 오전인지 오후인지 판단
+    hours = hours % 12 || 12; // 시간이 0일 경우 12로 변경
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+    var timeString = padZero(hours) + ":" + padZero(minutes) + ":" + padZero(seconds) + " " + meridiem; // 시간에 오전/오후 추가
+    document.getElementById("digitalClock").textContent = timeString;
+}
+
+      function padZero(num) {
+        return num < 10 ? "0" + num : num;
+      }
+
+      // 매 초마다 시계 업데이트
+      setInterval(updateClock, 1000);
+
+      // 페이지 로드시 시계 업데이트
+      updateClock();
+    </script>
   </body>
 </html>
